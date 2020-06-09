@@ -1,12 +1,8 @@
 const validator = require('validator');
 const chalk = require('chalk');
 
-const { getNotes } = require('./notes');
+const command = process.argv[2];
 
-const notes = getNotes();
-
-const isEmail = validator.isEmail('paul@google.com');
-
-console.log(chalk.bgBlue(notes));
-console.log(isEmail);
-console.log(chalk.green('Success'));
+if (command === 'Add') {
+  console.log(chalk.bold.red.bgWhiteBright('Adding notes...'));
+}
