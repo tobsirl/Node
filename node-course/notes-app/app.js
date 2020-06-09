@@ -1,8 +1,8 @@
 const validator = require('validator');
 const chalk = require('chalk');
+const argv = require('yargs').argv;
 
-const command = process.argv[2];
 
-if (command === 'Add') {
-  console.log(chalk.bold.red.bgWhiteBright('Adding notes...'));
-}
+console.log(process.argv);
+console.log(argv._[0]);
+
