@@ -1,7 +1,5 @@
 {
-  "title": "Ego is the Enemy",
-  "author": "Ryan Holiday",
-  "details": {
-    "isbn": "adajsdof"
-  }
+  "name": "Paul",
+  "planet": "Earth",
+  "age": 40
 }
