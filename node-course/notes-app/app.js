@@ -1,18 +1,31 @@
 const validator = require('validator');
 const chalk = require('chalk');
-const yargv = require('yargs');
+const yargs = require('yargs');
 
 // Create the add command
-yargv.command({
+yargs.command({
   command: 'add',
   describe: 'Adds a new note',
-  handler: function () {
-    console.log(`Adding a new note`);
+  builder: {
+    title: {
+      describe: 'Note Title',
+      demandOption: true,
+      type: 'string',
+    },
+    body: {
+      describe: 'Body of the note',
+      demandOption: true,
+      type: 'string',
+    },
+  },
+  handler: function (argv) {
+    console.log(`Title: ${argv.title}`);
+    console.log(`Body: ${argv.body}`);
   },
 });
 
 // Create the remove command
-yargv.command({
+yargs.command({
   command: 'remove',
   describe: 'Remove a note',
   handler: function () {
@@ -21,7 +34,7 @@ yargv.command({
 });
 
 // List the notes
-yargv.command({
+yargs.command({
   command: 'list',
   describe: 'List all the notes',
   handler: function () {
@@ -30,12 +43,12 @@ yargv.command({
 });
 
 // Read a note
-yargv.command({
+yargs.command({
   command: 'read',
-  describe: 'Read a specific note',
+  describe: 'Read a note',
   handler: function () {
-    console.log(`Read a specific note`);
+    console.log(`Read a note`);
   },
 });
 
-console.log(yargv.argv);
+yargs.parse();
