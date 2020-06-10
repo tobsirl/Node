@@ -8,5 +8,8 @@ const book = {
 
 const bookJson = JSON.stringify(book, null, 2);
 
-console.log(book);
 console.log(bookJson);
+
+const parsedData = JSON.parse(bookJson);
+
+console.log(parsedData.author);
