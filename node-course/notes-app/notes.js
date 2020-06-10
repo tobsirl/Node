@@ -7,14 +7,20 @@ exports.getNotes = () => {
 exports.addNote = (title, body) => {
   const notes = loadNotes();
 
-  const newNote = {
-    title,
-    body,
-  };
+  const duplicateNotes = notes.filter((note) => note.title === title);
 
-  notes.push(newNote);
+  if (duplicateNotes.length === 0) {
+    const newNote = {
+      title,
+      body,
+    };
 
-  saveNotes(notes);
+    notes.push(newNote);
+    saveNotes(notes);
+    console.log(`New note added...`);
+  } else {
+    console.log(`Note title taken...`);
+  }
 };
 
 const saveNotes = (notes) => {
