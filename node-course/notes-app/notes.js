@@ -8,9 +8,9 @@ exports.getNotes = () => {
 exports.addNote = (title, body) => {
   const notes = loadNotes();
 
-  const duplicateNotes = notes.filter((note) => note.title === title);
+  const duplicateNote = notes.find((note) => note.title === title);
 
-  if (duplicateNotes.length === 0) {
+  if (!duplicateNote) {
     const newNote = {
       title,
       body,
@@ -47,6 +47,19 @@ exports.listNotes = () => {
   return notes.map((note) =>
     console.log(chalk.bgGreen.black(`Title: ${note.title}`))
   );
+};
+
+exports.readNote = (title) => {
+  const notes = loadNotes();
+
+  const note = notes.find((note) => note.title === title);
+
+  if (note) {
+    console.log(chalk.bgGreen.black(`${note.title}`));
+    console.log(`${note.body}`);
+  } else {
+    console.log(chalk.bgRed(`No note found!`));
+  }
 };
 
 const saveNotes = (notes) => {
