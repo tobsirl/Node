@@ -23,6 +23,10 @@ exports.addNote = (title, body) => {
   }
 };
 
+exports.removeNote = (title) => {
+  console.log(`Romove ${title}`);
+};
+
 const saveNotes = (notes) => {
   const data = JSON.stringify(notes);
 
