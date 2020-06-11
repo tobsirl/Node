@@ -40,6 +40,15 @@ exports.removeNote = (title) => {
   }
 };
 
+exports.listNotes = () => {
+  const notes = loadNotes();
+
+  console.log(chalk.bgGreen.black(`Your Notes!`));
+  return notes.map((note) =>
+    console.log(chalk.bgGreen.black(`Title: ${note.title}`))
+  );
+};
+
 const saveNotes = (notes) => {
   const data = JSON.stringify(notes);
 
