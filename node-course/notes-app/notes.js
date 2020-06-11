@@ -1,4 +1,5 @@
 const fs = require('fs');
+const chalk = require('chalk');
 
 exports.getNotes = () => {
   return `Your notes...`;
@@ -29,6 +30,12 @@ exports.removeNote = (title) => {
 
   // remove the note
   const filteredNotes = notes.filter((note) => note.title !== title);
+
+  if (notes.length > filteredNotes.length) {
+    console.log(chalk.bgGreen(`Note removed!`));
+  } else {
+    console.log(chalk.bgRed(`Note not removed!`));
+  }
 
   // save the results
   saveNotes(filteredNotes);
