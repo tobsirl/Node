@@ -1,7 +1,1 @@
-[{
-  "title": "This is a title",
-  "body": "This is the body"
-}, {
-  "title": "List",
-  "body": "Buy Pants"
-}]
+[{"title":"Shopping List","body":"Beer, Chips"},{"title":"This is a title","body":"This is a body"}]

@@ -24,7 +24,14 @@ exports.addNote = (title, body) => {
 };
 
 exports.removeNote = (title) => {
-  console.log(`Romove ${title}`);
+  // load in the notes
+  const notes = loadNotes();
+
+  // remove the note
+  const filteredNotes = notes.filter((note) => note.title !== title);
+
+  // save the results
+  saveNotes(filteredNotes);
 };
 
 const saveNotes = (notes) => {
