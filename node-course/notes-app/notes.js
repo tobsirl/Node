@@ -33,12 +33,11 @@ exports.removeNote = (title) => {
 
   if (notes.length > filteredNotes.length) {
     console.log(chalk.bgGreen(`Note removed!`));
+    // save the results
+    saveNotes(filteredNotes);
   } else {
     console.log(chalk.bgRed(`Note not removed!`));
   }
-
-  // save the results
-  saveNotes(filteredNotes);
 };
 
 const saveNotes = (notes) => {
