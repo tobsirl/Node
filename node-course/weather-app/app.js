@@ -1,6 +1,7 @@
 const request = require('request');
 require('dotenv').config();
 const fetch = require('node-fetch');
+const { getGeocode } = require('./utils/getGeocode');
 
 const getCurrentWeather = async () => {
   const { ACCESS_KEY } = process.env;
@@ -25,17 +26,7 @@ const displayCurrentWeather = (weather) => {
 
 // getCurrentWeather();
 
-const getLatLong = async () => {
-  const URL = `https://api.mapbox.com/geocoding/v5/mapbox.places/Los%20Angeles.json?access_token=pk.eyJ1IjoidG9ic2lybCIsImEiOiJjano4Mno2MjIxMWNkM25vNmpsbXlqbmZrIn0.QABta77PgnY0xTlVDR9kgg&limit=1`;
-  try {
-    const response = await fetch(URL);
-    const data = await response.json();
-    const latitude = data.features[0].center[1];
-    const longitude = data.features[0].center[0];
-    console.log(`Latitude: ${latitude} Longitude: ${longitude}`);
-  } catch (err) {
-    console.log(err.message);
-  }
-};
-
-getLatLong();
+getGeocode('Clonmel').catch((err) =>
+  console.log(`Error Message: ${err.message}`)
+);
+getGeocode('New York').catch((err) => console.log(err.message));
