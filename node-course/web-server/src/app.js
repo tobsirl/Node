@@ -1,10 +1,9 @@
+const path = require('path');
 const express = require('express');
 
 const app = express();
 
-app.get('/', (req, res) => {
-  res.status(200).send(`Welcome from the server`);
-});
+app.use(express.static(path.join(__dirname, '../public/')));
 
 app.get('/help', (req, res) => {
   res.status(200).send('help page');
