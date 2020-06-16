@@ -5,14 +5,6 @@ const app = express();
 
 app.use(express.static(path.join(__dirname, '../public/')));
 
-app.get('/help', (req, res) => {
-  res.status(200).send('help page');
-});
-
-app.get('/about', (req, res) => {
-  res.status(200).send(`<h1>About</h1>`);
-});
-
 app.get('/weather', (req, res) => {
   res.status(200).send({
     location: 'Ireland',
