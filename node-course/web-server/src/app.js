@@ -11,13 +11,13 @@ app.get('/help', (req, res) => {
 });
 
 app.get('/about', (req, res) => {
-  res.status(200).send(`About page`)
-})
+  res.status(200).send(`<h1>About</h1>`);
+});
 
 app.get('/weather', (req, res) => {
-  res.status(200).json({
+  res.status(200).send({
     location: 'Ireland',
-    rain: 'Lots of rain',
+    forecst: 'Raining',
   });
 });
 
