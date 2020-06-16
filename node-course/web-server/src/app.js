@@ -33,6 +33,8 @@ app.get('/about', (req, res) => {
 app.get('/help', (req, res) => {
   res.render('help', {
     message: 'This is a message on the help page',
+    title: 'Help',
+    name: 'Paul Tobin',
   });
 });
 
