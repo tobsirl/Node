@@ -7,11 +7,11 @@
 body {
   font-family: 'Poppins', sans-serif;
   margin: 0;
-  padding: 0 16px;
+  padding: 0;
   color: #333333;
 }
 
-img {
+.portrait {
   width: 250px;
 }
 
@@ -19,6 +19,12 @@ img {
   width: 80%;
   margin: 0 auto;
   max-width: 650px;
+}
+
+.nav-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .navbar {
@@ -34,4 +40,24 @@ ul {
 
 li {
   list-style: none;
+  text-transform: uppercase;
+  margin-left: 20px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.footer {
+  color: #888888;
+  border-top: 1px solid #eeeeee;
+  margin-top: 16px;
+  padding: 16px 0;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-height: 100vh;
 }

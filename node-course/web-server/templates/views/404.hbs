@@ -9,11 +9,16 @@
 </head>
 
 <body>
-  <div class="container">
-    {{>header}}
+  <div class="main-content container">
+    <div class="nav-section">
+      {{>header}}
+    </div>
     <h1>{{errorMessage}}</h1>
+  </div>
+  <div class="footer container">
     {{>footer}}
   </div>
+
 </body>
 
 </html>
