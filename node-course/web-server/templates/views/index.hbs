@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="/img/weather.png">
   <link rel="stylesheet" href="/css/styles.css">
-  <script src="/js/index.js"></script>
+
   <title>Weather</title>
 </head>
 
@@ -15,10 +15,18 @@
     <div class="nav-section">
       {{>header}}
     </div>
+    <form>
+      <input type="text" placeholder="Location">
+      <button>Search</button>
+    </form>
+
+    <p id="message-one"></p>
+    <p id="message-two"></p>
   </div>
   <div class="footer container">
     {{>footer}}
   </div>
+  <script src="/js/index.js"></script>
 </body>
 
 </html>
