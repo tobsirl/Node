@@ -11,11 +11,11 @@ exports.forecast = (latitude, longitude, callback) => {
     } else {
       callback(
         undefined,
-        body.daily.data[0].summary +
+        body.current.weather_descriptions[0] +
           ' It is currently ' +
-          body.currently.temperature +
+          body.current.temperature +
           ' degress out. There is a ' +
-          body.currently.precipProbability +
+          body.current.precip +
           '% chance of rain.'
       );
     }
