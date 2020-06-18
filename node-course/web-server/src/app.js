@@ -39,9 +39,28 @@ app.get('/help', (req, res) => {
 });
 
 app.get('/weather', (req, res) => {
+  if (!req.query.address) {
+    return res.send({
+      error: `Must provide an address`,
+    });
+  }
+
   res.status(200).send({
     location: 'Ireland',
     forecst: 'Raining',
+    address: req.query.address,
+  });
+});
+
+app.get('/products', (req, res) => {
+  if (!req.query.search) {
+    return res.send({
+      error: `Must provide a search term`,
+    });
+  }
+
+  res.send({
+    products: [],
   });
 });
 

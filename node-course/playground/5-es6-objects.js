@@ -40,3 +40,16 @@ function objectify(key, value) {
 
 objectify('name', 'Paul'); //?
 
+const inks = {
+  cyan: 6,
+  yellow: 4,
+  red: 23,
+  blue: 79,
+  green: 384,
+};
+
+Object.keys(inks); //?
+Object.values(inks); //?
+Object.entries(inks); //?
+
+
