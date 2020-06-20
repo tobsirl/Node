@@ -47,5 +47,27 @@ MongoClient.connect(
     //     console.log(result.ops);
     //   }
     // );
+
+    db.collection('tasks').insertMany(
+      [
+        {
+          description: 'Task 1',
+          completed: true,
+        },
+        {
+          description: 'Task 2',
+          completed: false,
+        },
+        {
+          description: 'Task 3',
+          completed: true,
+        },
+      ],
+      (error, result) => {
+        if (error) return new Error(`Unable to insert documents`);
+
+        console.log(result.ops);
+      }
+    );
   }
 );
