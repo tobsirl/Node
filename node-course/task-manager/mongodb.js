@@ -96,17 +96,34 @@ MongoClient.connect(
     //     console.log(count);
     //   });
 
-    db.collection('tasks').findOne(
-      { _id: ObjectID('5eee16dcd48997515cc67ca0') },
-      (error, task) => {
-        console.log(task);
+    // db.collection('tasks').findOne(
+    //   { _id: ObjectID('5eee16dcd48997515cc67ca0') },
+    //   (error, task) => {
+    //     console.log(task);
+    //   }
+    // );
+
+    // db.collection('tasks')
+    //   .find({ completed: false })
+    //   .toArray((error, task) => {
+    //     console.log(task);
+    //   });
+
+    const updatePromise = db.collection('users').updateOne(
+      {
+        _id: new ObjectID('5eece0bc0ee001492816d8e1'),
+      },
+      {
+        $set: {
+          name: 'Rachel',
+        },
       }
     );
 
-    db.collection('tasks')
-      .find({ completed: false })
-      .toArray((error, task) => {
-        console.log(task);
-      });
+    updatePromise
+      .then((user) => {
+        console.log(user);
+      })
+      .then((err) => console.log(err));
   }
 );
