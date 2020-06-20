@@ -73,13 +73,19 @@ MongoClient.connect(
     //   }
     // );
 
-    db.collection('users').findOne(
-      { _id: ObjectID('5eee11fbcfabac37ac3f7f21') },
-      (error, result) => {
-        if (error) return new Error(`Can't find document`);
+    // db.collection('users').findOne(
+    //   { _id: ObjectID('5eee11fbcfabac37ac3f7f21') },
+    //   (error, result) => {
+    //     if (error) return new Error(`Can't find document`);
 
-        console.log(result);
-      }
-    );
+    //     console.log(result);
+    //   }
+    // );
+
+    db.collection('users')
+      .find({ age: 27 })
+      .toArray((error, users) => {
+        console.log(users);
+      });
   }
 );
