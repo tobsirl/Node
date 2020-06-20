@@ -7,10 +7,6 @@ const { MongoClient, ObjectID } = require('mongodb');
 const connectionURL = 'mongodb://127.0.0.1:27017';
 const databaseName = 'tast-manager';
 
-const id = new ObjectID();
-console.log(id.id);
-console.log(id.getTimestamp());
-
 MongoClient.connect(
   connectionURL,
   { useUnifiedTopology: true },
@@ -21,19 +17,19 @@ MongoClient.connect(
 
     const db = client.db(databaseName);
 
-    db.collection('users').insertOne(
-      {
-        name: 'Kevin',
-        age: 27,
-      },
-      (error, result) => {
-        if (error) {
-          return new Error(`Unable to insert user`);
-        }
+    // db.collection('users').insertOne(
+    //   {
+    //     name: 'Kevin',
+    //     age: 27,
+    //   },
+    //   (error, result) => {
+    //     if (error) {
+    //       return new Error(`Unable to insert user`);
+    //     }
 
-        console.log(result.ops);
-      }
-    );
+    //     console.log(result.ops);
+    //   }
+    // );
 
     // db.collection('users').insertMany(
     //   [
@@ -77,9 +73,8 @@ MongoClient.connect(
     //   }
     // );
 
-    db.collection('tasks').findOne(
-      '5eee13d3c327302b38c50eb3',
-      {},
+    db.collection('users').findOne(
+      { _id: ObjectID('5eee11fbcfabac37ac3f7f21') },
       (error, result) => {
         if (error) return new Error(`Can't find document`);
 
