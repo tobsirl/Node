@@ -109,21 +109,33 @@ MongoClient.connect(
     //     console.log(task);
     //   });
 
-    const updatePromise = db.collection('users').updateOne(
-      {
-        _id: new ObjectID('5eece0bc0ee001492816d8e1'),
-      },
-      {
-        $set: {
-          name: 'Rachel',
-        },
-      }
-    );
+    // const updatePromise = db.collection('users').updateOne(
+    //   {
+    //     _id: new ObjectID('5eece0bc0ee001492816d8e1'),
+    //   },
+    //   {
+    //     $inc: {
+    //       age: 1,
+    //     },
+    //   }
+    // );
 
-    updatePromise
-      .then((user) => {
-        console.log(user);
-      })
-      .then((err) => console.log(err));
+    // updatePromise
+    //   .then((user) => {
+    //     console.log(user);
+    //   })
+    //   .then((err) => console.log(err));
+
+    db.collection('tasks')
+      .updateMany(
+        { completed: false },
+        {
+          $set: {
+            completed: true,
+          },
+        }
+      )
+      .then((result) => console.log(result))
+      .catch((err) => console.log(err));
   }
 );
