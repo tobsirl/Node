@@ -82,10 +82,31 @@ MongoClient.connect(
     //   }
     // );
 
-    db.collection('users')
-      .find({ age: 27 })
-      .toArray((error, users) => {
-        console.log(users);
+    // .find returns a cursor to the data
+    // db.collection('users')
+    //   .find({ age: 27 })
+    //   .toArray((error, users) => {
+    //     console.log(users);
+    //   });
+
+    // the cursor allow you to run other mehtods like count on the data
+    // db.collection('users')
+    //   .find({ age: 27 })
+    //   .count((error, count) => {
+    //     console.log(count);
+    //   });
+
+    db.collection('tasks').findOne(
+      { _id: ObjectID('5eee16dcd48997515cc67ca0') },
+      (error, task) => {
+        console.log(task);
+      }
+    );
+
+    db.collection('tasks')
+      .find({ completed: false })
+      .toArray((error, task) => {
+        console.log(task);
       });
   }
 );
