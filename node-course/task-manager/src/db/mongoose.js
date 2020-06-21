@@ -27,6 +27,17 @@ const User = mongoose.model('User', {
       }
     },
   },
+  password: {
+    type: String,
+    required: true,
+    trim: true,
+    minlength: [6, 'Password must be more than 6 charactors'],
+    validate(value) {
+      if (value.toLowerCase().includes('password')) {
+        throw new Error(`Password cannot contain password`);
+      }
+    },
+  },
   age: {
     type: Number,
     default: 0,
@@ -36,7 +47,7 @@ const User = mongoose.model('User', {
   },
 });
 
-const me = new User({ name: 'Mike', email: 'mike@' });
+const me = new User({ name: 'Mike', email: 'mike@example.com', password: 'PASSWORD'});
 
 me.save()
   .then(() => {
