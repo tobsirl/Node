@@ -25,6 +25,27 @@ app.post('/users', (req, res) => {
   });
 });
 
+app.get('/users', (req, res) => {
+  User.find()
+    .then((users) => {
+      res.status(200).send(users);
+    })
+    .catch((err) => {
+      res.status(404).send(err);
+    });
+});
+
+app.get('/users/:id', (req, res) => {
+  const { id } = req.params;
+
+  User.findById(id)
+    .then((user) => {
+      if (!user) return res.status(404).send(`No user found`);
+      res.status(200).send(user);
+    })
+    .catch((err) => res.status(500).send(err.message));
+});
+
 app.post('/tasks', (req, res) => {
   const { description, completed } = req.body;
 
@@ -35,7 +56,7 @@ app.post('/tasks', (req, res) => {
 
   newTask
     .save()
-    .then(() => res.send(newTask))
+    .then(() => res.status(201).send(newTask))
     .catch((err) => res.send(err.message));
 });
 
