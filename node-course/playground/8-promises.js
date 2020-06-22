@@ -28,17 +28,30 @@ const add = (a, b) => {
   });
 };
 
-add(1, 2)
+// add(1, 2)
+//   .then((sum) => {
+//     console.log(sum);
+
+//     add(sum, 5)
+//       .then((sum2) => {
+//         console.log(sum2);
+//       })
+//       .catch((err) => {
+//         console.log(err);
+//       });
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
+
+// promise chaining
+add(1, 1)
   .then((sum) => {
     console.log(sum);
-
-    add(sum, 5)
-      .then((sum2) => {
-        console.log(sum2);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    return add(sum, 4);
+  })
+  .then((sum2) => {
+    console.log(sum2);
   })
   .catch((err) => {
     console.log(err);
