@@ -8,15 +8,3 @@ mongoose
   })
   .then(() => console.log(`Connected to the database`))
   .catch((err) => console.log(err));
-
-const Task = mongoose.model('Task', {
-  description: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  completed: {
-    type: Boolean,
-    default: false,
-  },
-});

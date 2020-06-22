@@ -1,5 +1,6 @@
 const express = require('express');
 const User = require('./models/user');
+const Task = require('./models/task');
 
 const app = express();
 
@@ -22,6 +23,20 @@ app.post('/users', (req, res) => {
       user: newUser,
     },
   });
+});
+
+app.post('/tasks', (req, res) => {
+  const { description, completed } = req.body;
+
+  const newTask = new Task({
+    description,
+    completed,
+  });
+
+  newTask
+    .save()
+    .then(() => res.send(newTask))
+    .catch((err) => res.send(err.message));
 });
 
 module.exports = app;
