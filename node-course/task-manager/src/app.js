@@ -75,7 +75,7 @@ app.post('/users', async (req, res) => {
 });
 
 // task endpoints
-app.post('/tasks', (req, res) => {
+app.post('/tasks', async (req, res) => {
   const { description, completed } = req.body;
 
   const newTask = new Task({
@@ -83,30 +83,63 @@ app.post('/tasks', (req, res) => {
     completed,
   });
 
-  newTask
-    .save()
-    .then(() => res.status(201).send(newTask))
-    .catch((err) => res.send(err.message));
-});
+  try {
+    await newTask.save(newTask);
 
-app.get('/tasks', (req, res) => {
-  Task.find()
-    .then((tasks) => res.status(200).send(tasks))
-    .catch((err) => res.status(500).send(err.message));
-});
-
-app.get('/tasks/:id', (req, res) => {
-  const { id } = req.params;
-  Task.findById(id)
-    .then((task) => {
-      if (!task) {
-        return res.status(404).send(`No task found`);
-      }
-      res.status(200).send(task);
-    })
-    .catch((err) => {
-      res.status(500).send(err);
+    res.status(201).json({
+      status: 'success',
+      data: {
+        user: newTask,
+      },
     });
+  } catch (error) {
+    res.status(404).json({
+      status: 'failed',
+      error,
+    });
+  }
+});
+
+app.get('/tasks', async (req, res) => {
+  try {
+    const tasks = await Task.find();
+
+    res.status(200).json({
+      status: 'success',
+      data: {
+        tasks,
+      },
+    });
+  } catch (error) {
+    res.status(404).json({
+      status: 'failed',
+      error,
+    });
+  }
+});
+
+app.get('/tasks/:id', async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const task = await Task.findById(id);
+
+    if (!task) {
+      return res.status(404).send(`Task not found!`);
+    }
+
+    res.status(200).json({
+      status: 'success',
+      data: {
+        task,
+      },
+    });
+  } catch (error) {
+    res.status(404).json({
+      status: 'failed',
+      error,
+    });
+  }
 });
 
 module.exports = app;
