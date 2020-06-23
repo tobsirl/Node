@@ -23,25 +23,30 @@ app.get('/users', async (req, res) => {
       error,
     });
   }
-
-  // User.find()
-  //   .then((users) => {
-  //     res.status(200).send(users);
-  //   })
-  //   .catch((err) => {
-  //     res.status(404).send(err);
-  //   });
 });
 
-app.get('/users/:id', (req, res) => {
+app.get('/users/:id', async (req, res) => {
   const { id } = req.params;
 
-  User.findById(id)
-    .then((user) => {
-      if (!user) return res.status(404).send(`No user found`);
-      return res.status(200).send(user);
-    })
-    .catch((err) => res.status(500).send(err.message));
+  try {
+    const user = await User.findById(id);
+
+    if (!user) {
+      return res.status(404).send(`User not found!`);
+    }
+
+    res.status(200).json({
+      status: 'success',
+      data: {
+        user,
+      },
+    });
+  } catch (error) {
+    res.status(404).json({
+      status: 'failed',
+      error,
+    });
+  }
 });
 
 app.post('/users', async (req, res) => {
