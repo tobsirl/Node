@@ -7,14 +7,30 @@ const app = express();
 app.use(express.json());
 
 // user endpoints
-app.get('/users', (req, res) => {
-  User.find()
-    .then((users) => {
-      res.status(200).send(users);
-    })
-    .catch((err) => {
-      res.status(404).send(err);
+app.get('/users', async (req, res) => {
+  const users = await User.find();
+
+  try {
+    res.status(200).json({
+      status: 'success',
+      data: {
+        users,
+      },
     });
+  } catch (error) {
+    res.status(404).json({
+      status: 'failed',
+      error,
+    });
+  }
+
+  // User.find()
+  //   .then((users) => {
+  //     res.status(200).send(users);
+  //   })
+  //   .catch((err) => {
+  //     res.status(404).send(err);
+  //   });
 });
 
 app.get('/users/:id', (req, res) => {
@@ -28,7 +44,7 @@ app.get('/users/:id', (req, res) => {
     .catch((err) => res.status(500).send(err.message));
 });
 
-app.post('/users', (req, res) => {
+app.post('/users', async (req, res) => {
   const { name, email, password } = req.body;
 
   const newUser = new User({
@@ -37,14 +53,20 @@ app.post('/users', (req, res) => {
     password,
   });
 
-  newUser.save();
-
-  res.status(201).json({
-    status: 'sucess',
-    data: {
-      user: newUser,
-    },
-  });
+  try {
+    await newUser.save();
+    res.status(201).json({
+      status: 'success',
+      data: {
+        user: newUser,
+      },
+    });
+  } catch (error) {
+    res.status(404).json({
+      status: 'failed',
+      error,
+    });
+  }
 });
 
 // task endpoints
