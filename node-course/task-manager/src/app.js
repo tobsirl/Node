@@ -234,4 +234,23 @@ app.patch('/tasks/:id', async (req, res) => {
   }
 });
 
+app.delete('/tasks/:id', async (req, res) => {
+  try {
+    const deleteTask = await Task.findByIdAndDelete(req.params.id);
+    if (!deleteTask) {
+      return res.status(404).json({
+        status: 'failed',
+        message: 'Task not found',
+      });
+    }
+    res.status(200).json({
+      status: 'success',
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: 'failed',
+    });
+  }
+});
+
 module.exports = app;
