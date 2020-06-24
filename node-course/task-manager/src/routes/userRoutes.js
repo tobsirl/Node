@@ -1,26 +1,15 @@
 const express = require('express');
+
+// Models
 const User = require('../models/user');
+
+// Controllers
+const { getUsers } = require('../controllers/userController');
 
 const router = express.Router();
 
 // user endpoints
-router.get('/', async (req, res) => {
-  const users = await User.find();
-
-  try {
-    res.status(200).json({
-      status: 'success',
-      data: {
-        users,
-      },
-    });
-  } catch (error) {
-    res.status(404).json({
-      status: 'failed',
-      error,
-    });
-  }
-});
+router.get('/', getUsers);
 
 router.get('/:id', async (req, res) => {
   const { id } = req.params;
