@@ -191,4 +191,47 @@ app.get('/tasks/:id', async (req, res) => {
   }
 });
 
+app.patch('/tasks/:id', async (req, res) => {
+  const { id } = req.params;
+  const { description, completed } = req.body;
+
+  const updates = Object.keys(req.body);
+  const allowedUpdates = ['description', 'completed'];
+
+  const isAllowed = updates.every((update) => allowedUpdates.includes(update));
+
+  if (!isAllowed) {
+    return res.status(400).json({
+      status: 'failed',
+      message: 'Invalid Updates',
+    });
+  }
+
+  try {
+    const updateTask = await Task.findByIdAndUpdate(
+      id,
+      { description, completed },
+      { new: true, runValidators: true }
+    );
+
+    if (!updateTask) {
+      return res.status(404).json({
+        status: 'failed',
+        message: 'Task not found',
+      });
+    }
+    res.status(200).json({
+      status: 'success',
+      data: {
+        updateTask,
+      },
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: 'failed',
+      error,
+    });
+  }
+});
+
 module.exports = app;
