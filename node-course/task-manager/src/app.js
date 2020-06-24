@@ -74,6 +74,55 @@ app.post('/users', async (req, res) => {
   }
 });
 
+app.patch('/users/:id', async (req, res) => {
+  const { id } = req.params;
+  const { name, email, password } = req.body;
+
+  const updates = Object.keys(req.body);
+  const allowedUpdates = ['name', 'email', 'password', 'age'];
+  const isValidOperation = updates.every((update) =>
+    allowedUpdates.includes(update)
+  );
+
+  if (!isValidOperation) {
+    return res.status(400).json({
+      status: 'failed',
+      message: 'Invalid Updates',
+    });
+  }
+
+  try {
+    const updateUser = await User.findByIdAndUpdate(
+      id,
+      {
+        name,
+        email,
+        password,
+      },
+      { new: true, runValidators: true }
+    );
+
+    if (!updateUser) {
+      return res.status(404).json({
+        status: 'failed',
+        message: 'User not found',
+      });
+    }
+
+    res.status(200).json({
+      status: 'success',
+      data: {
+        updateUser,
+      },
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: 'failed',
+      error,
+    });
+  }
+});
+
 // task endpoints
 app.post('/tasks', async (req, res) => {
   const { description, completed } = req.body;
