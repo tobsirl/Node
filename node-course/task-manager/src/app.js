@@ -123,6 +123,27 @@ app.patch('/users/:id', async (req, res) => {
   }
 });
 
+app.delete('/users/:id', async (req, res) => {
+  try {
+    const deleteUser = await User.findByIdAndDelete(req.params.id);
+
+    if (!deleteUser) {
+      return res.status(404).json({
+        status: 'failed',
+        message: 'User not found',
+      });
+    }
+
+    res.status(200).json({
+      status: 'success',
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: 'failed',
+    });
+  }
+});
+
 // task endpoints
 app.post('/tasks', async (req, res) => {
   const { description, completed } = req.body;
