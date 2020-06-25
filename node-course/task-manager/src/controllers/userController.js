@@ -87,7 +87,7 @@ exports.updateUser = async (req, res) => {
   try {
     const updateUser = await User.findById(id);
 
-    updates.forEach((update) => (user[update] = req.body[update]));
+    updates.forEach((update) => (updateUser[update] = req.body[update]));
 
     updateUser.save();
 
