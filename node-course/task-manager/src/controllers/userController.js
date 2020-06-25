@@ -70,7 +70,6 @@ exports.createUser = async (req, res) => {
 
 exports.updateUser = async (req, res) => {
   const { id } = req.params;
-  const { name, email, password } = req.body;
 
   const updates = Object.keys(req.body);
   const allowedUpdates = ['name', 'email', 'password', 'age'];
@@ -86,15 +85,11 @@ exports.updateUser = async (req, res) => {
   }
 
   try {
-    const updateUser = await User.findByIdAndUpdate(
-      id,
-      {
-        name,
-        email,
-        password,
-      },
-      { new: true, runValidators: true }
-    );
+    const updateUser = await User.findById(id);
+
+    updates.forEach((update) => (user[update] = req.body[update]));
+
+    updateUser.save();
 
     if (!updateUser) {
       return res.status(404).json({
