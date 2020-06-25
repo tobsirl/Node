@@ -69,7 +69,6 @@ exports.getTask = async (req, res) => {
 
 exports.updateTask = async (req, res) => {
   const { id } = req.params;
-  const { description, completed } = req.body;
 
   const updates = Object.keys(req.body);
   const allowedUpdates = ['description', 'completed'];
@@ -84,11 +83,11 @@ exports.updateTask = async (req, res) => {
   }
 
   try {
-    const updateTask = await Task.findByIdAndUpdate(
-      id,
-      { description, completed },
-      { new: true, runValidators: true }
-    );
+    const updateTask = await Task.findById(id);
+
+    updates.forEach((update) => (updateTask[update] = req.body[update]));
+
+    updateTask.save();
 
     if (!updateTask) {
       return res.status(404).json({
