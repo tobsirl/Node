@@ -1,6 +1,15 @@
 // Models
 const User = require('../models/user');
 
+exports.login = async (req, res) => {
+  const {email, password} = req.body
+  try {
+    const user = await User.findByCredentials(email, password)
+    
+  } catch (error) {
+    
+  }
+}
 exports.getUsers = async (req, res) => {
   const users = await User.find();
 
