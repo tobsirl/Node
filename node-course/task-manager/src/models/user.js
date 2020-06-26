@@ -21,6 +21,7 @@ const userSchema = new mongoose.Schema({
   },
   password: {
     type: String,
+    unique: true,
     required: true,
     trim: true,
     minlength: [6, 'Password must be more than 6 charactors'],
@@ -39,6 +40,27 @@ const userSchema = new mongoose.Schema({
   },
 });
 
+userSchema.statics.findByCredentials = async (email, password) => {
+  // find the user
+  const user = await User.findOne({ email });
+
+  // if the user doesn't exist, throw an error
+  if (!user) {
+    throw new Error(`Unable to login`);
+  }
+
+  // use brypt compare to check the password
+  const isMatch = await bcrypt.compare(password, user.password);
+
+  // incorrect password, throw error
+  if (!isMatch) {
+    throw new Error(`Unable to login`);
+  }
+
+  return user;
+};
+
+// hash the plaintext password
 userSchema.pre('save', async function (next) {
   const user = this;
 
