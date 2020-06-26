@@ -65,11 +65,13 @@ exports.createUser = async (req, res) => {
 
   try {
     await newUser.save();
+    const token = await newUser.generateAuthToken();
     res.status(201).json({
       status: 'success',
       data: {
         user: newUser,
       },
+      token: token,
     });
   } catch (error) {
     res.status(404).json({
