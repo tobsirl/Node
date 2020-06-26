@@ -39,11 +39,24 @@ const userSchema = new mongoose.Schema({
       if (value < 0) throw new Error(`Age must be a positive number`);
     },
   },
+  tokens: [
+    {
+      token: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
 });
 
 userSchema.methods.generateAuthToken = async function () {
   const user = this;
   const token = await jwt.sign({ _id: user.id.toString() }, 'thecakeisalie');
+
+  user.tokens = user.tokens.concat({ token });
+
+  await user.save();
+  
   return token;
 };
 
