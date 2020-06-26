@@ -32,14 +32,14 @@ app.use('/tasks/', taskRouter);
 // const jwt = require('jsonwebtoken');
 
 // const myFunction = async () => {
-//   // create a token with id, secret and options
+   // create a token with id, secret and options
 //   const token = jwt.sign({ _id: 'abc123' }, 'thecakeisalie', {
 //     expiresIn: '7 days',
 //   });
 
 //   console.log(token);
 
-//   // verify the token
+  // verify the token
 //   const data = jwt.verify(token, 'thecakeisalie');
 
 //   console.log(data);
