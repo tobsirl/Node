@@ -10,6 +10,7 @@ const userSchema = new mongoose.Schema({
   },
   email: {
     type: String,
+    unique: true,
     required: true,
     trim: true,
     lowercase: true,
@@ -21,7 +22,6 @@ const userSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    unique: true,
     required: true,
     trim: true,
     minlength: [6, 'Password must be more than 6 charactors'],

@@ -19,7 +19,7 @@ router.get('/:id', getUser);
 
 router.post('/', createUser);
 
-router.post('users/login', login);
+router.post('/login', login);
 
 router.patch('/:id', updateUser);
 
