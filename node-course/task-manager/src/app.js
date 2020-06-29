@@ -8,43 +8,28 @@ const app = express();
 
 app.use(express.json());
 
+// app.use((req, res, next) => {
+//   if (req.method === 'GET') {
+//     res.send('GET requests are disable');
+//   } else {
+//     next();
+//   }
+// });
+
+app.use((req, res, next) => {
+  const methods = ['GET', 'POST', 'PATCH', 'DELETE'];
+
+  const isMatch = methods.every((method) => req.method === method);
+
+  if (!isMatch) {
+    res.status(503).send(`Server is under maintenace, please try again later`);
+  } else {
+    next();
+  }
+});
+
 // Routes
 app.use('/users/', userRouter);
 app.use('/tasks/', taskRouter);
-
-// const bcrypt = require('bcryptjs');
-
-// const myFunction = async () => {
-//   const password = 'JuAW2Zz3sfdvNPWc6Whm';
-
-//   const hashed = await bcrypt.hash(password, 10);
-
-//   console.log(`Password: ${password}`);
-//   console.log(`Hashed: ${hashed}`);
-
-//   const isMatch = await bcrypt.compare(password, hashed);
-
-//   console.log(isMatch);
-// };
-
-// myFunction();
-
-// const jwt = require('jsonwebtoken');
-
-// const myFunction = async () => {
-   // create a token with id, secret and options
-//   const token = jwt.sign({ _id: 'abc123' }, 'thecakeisalie', {
-//     expiresIn: '7 days',
-//   });
-
-//   console.log(token);
-
-  // verify the token
-//   const data = jwt.verify(token, 'thecakeisalie');
-
-//   console.log(data);
-// };
-
-// myFunction();
 
 module.exports = app;
