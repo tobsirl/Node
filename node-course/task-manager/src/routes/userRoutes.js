@@ -1,4 +1,5 @@
 const express = require('express');
+const { auth } = require('../middleware/auth');
 
 // Controllers
 const {
@@ -13,7 +14,7 @@ const {
 const router = express.Router();
 
 // user endpoints
-router.get('/', getUsers);
+router.get('/', auth, getUsers);
 
 router.get('/:id', getUser);
 

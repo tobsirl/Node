@@ -16,17 +16,17 @@ app.use(express.json());
 //   }
 // });
 
-app.use((req, res, next) => {
-  const methods = ['GET', 'POST', 'PATCH', 'DELETE'];
+// app.use((req, res, next) => {
+//   const methods = ['GET', 'POST', 'PATCH', 'DELETE'];
 
-  const isMatch = methods.every((method) => req.method === method);
+//   const isMatch = methods.every((method) => req.method === method);
 
-  if (!isMatch) {
-    res.status(503).send(`Server is under maintenace, please try again later`);
-  } else {
-    next();
-  }
-});
+//   if (!isMatch) {
+//     res.status(503).send(`Server is under maintenace, please try again later`);
+//   } else {
+//     next();
+//   }
+// });
 
 // Routes
 app.use('/users/', userRouter);
