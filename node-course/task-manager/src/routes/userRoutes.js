@@ -14,7 +14,7 @@ const {
 const router = express.Router();
 
 // user endpoints
-router.get('/', auth, getUsers);
+router.get('/me', auth, getUsers);
 
 router.get('/:id', getUser);
 
