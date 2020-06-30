@@ -4,6 +4,7 @@ const { auth } = require('../middleware/auth');
 // Controllers
 const {
   login,
+  logout,
   getUsers,
   getUser,
   createUser,
@@ -21,6 +22,8 @@ router.get('/:id', getUser);
 router.post('/', createUser);
 
 router.post('/login', login);
+
+router.post('/logout', auth, logout);
 
 router.patch('/:id', updateUser);
 

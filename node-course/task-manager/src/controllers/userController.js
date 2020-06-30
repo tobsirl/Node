@@ -12,8 +12,21 @@ exports.login = async (req, res) => {
   }
 };
 
+exports.logout = async (req, res) => {
+  console.log(req.user);
+  try {
+    req.user.tokens = req.user.tokens.filter((token) => {
+      return token.token !== req.token;
+    });
+    await req.user.save();
+    res.send();
+  } catch (error) {
+    res.status(500).send();
+  }
+};
+
 exports.getUsers = async (req, res) => {
-  const user = req.user
+  const user = req.user;
 
   try {
     res.status(200).json({
