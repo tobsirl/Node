@@ -80,8 +80,6 @@ exports.createUser = async (req, res) => {
 };
 
 exports.updateUser = async (req, res) => {
-  const { id } = req.params;
-
   const updates = Object.keys(req.body);
   const allowedUpdates = ['name', 'email', 'password', 'age'];
   const isValidOperation = updates.every((update) =>
@@ -96,23 +94,14 @@ exports.updateUser = async (req, res) => {
   }
 
   try {
-    const updateUser = await User.findById(id);
+    updates.forEach((update) => (req.user[update] = req.body[update]));
 
-    updates.forEach((update) => (updateUser[update] = req.body[update]));
-
-    updateUser.save();
-
-    if (!updateUser) {
-      return res.status(404).json({
-        status: 'failed',
-        message: 'User not found',
-      });
-    }
+    req.user.save();
 
     res.status(200).json({
       status: 'success',
       data: {
-        updateUser,
+        user: req.user,
       },
     });
   } catch (error) {
@@ -125,17 +114,10 @@ exports.updateUser = async (req, res) => {
 
 exports.deleteUser = async (req, res) => {
   try {
-    const deleteUser = await User.findByIdAndDelete(req.user._id);
-
-    if (!deleteUser) {
-      return res.status(404).json({
-        status: 'failed',
-        message: 'User not found',
-      });
-    }
-
+    await req.user.remove();
     res.status(200).json({
       status: 'success',
+      user: req.user,
     });
   } catch (error) {
     res.status(500).json({

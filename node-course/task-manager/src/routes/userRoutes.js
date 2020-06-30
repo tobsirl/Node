@@ -25,7 +25,7 @@ router.post('/logout', auth, logout);
 
 router.post('/logoutall', auth, logoutAll);
 
-router.patch('/:id', updateUser);
+router.patch('/me', auth, updateUser);
 
 router.delete('/me', auth, deleteUser);
 
