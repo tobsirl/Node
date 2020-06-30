@@ -1,11 +1,9 @@
 const Task = require('../models/task');
 
 exports.createTask = async (req, res) => {
-  const { description, completed } = req.body;
-
   const newTask = new Task({
-    description,
-    completed,
+    ...req.body,
+    owner: req.user._id,
   });
 
   try {
