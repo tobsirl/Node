@@ -7,7 +7,6 @@ const {
   logout,
   logoutAll,
   getUsers,
-  getUser,
   createUser,
   updateUser,
   deleteUser,
@@ -17,8 +16,6 @@ const router = express.Router();
 
 // user endpoints
 router.get('/me', auth, getUsers);
-
-router.get('/:id', getUser);
 
 router.post('/', createUser);
 
@@ -30,6 +27,6 @@ router.post('/logoutall', auth, logoutAll);
 
 router.patch('/:id', updateUser);
 
-router.delete('/:id', deleteUser);
+router.delete('/me', auth, deleteUser);
 
 module.exports = router;
