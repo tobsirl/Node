@@ -27,7 +27,7 @@ exports.logout = async (req, res) => {
 exports.logoutAll = async (req, res) => {
   try {
     req.user.tokens = [];
-    await req.user.save()
+    await req.user.save();
     res.send();
   } catch (error) {
     res.status(500).send();
