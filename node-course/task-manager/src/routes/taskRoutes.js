@@ -12,7 +12,7 @@ const {
 } = require('../controllers/taskController');
 
 // task endpoints
-router.get('/', getTasks);
+router.get('/', auth, getTasks);
 
 router.post('/', auth, createTask);
 
