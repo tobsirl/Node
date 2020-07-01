@@ -67,8 +67,6 @@ exports.getTask = async (req, res) => {
 };
 
 exports.updateTask = async (req, res) => {
-  const { id } = req.params;
-
   const updates = Object.keys(req.body);
   const allowedUpdates = ['description', 'completed'];
 
@@ -82,11 +80,10 @@ exports.updateTask = async (req, res) => {
   }
 
   try {
-    const updateTask = await Task.findById(id);
-
-    updates.forEach((update) => (updateTask[update] = req.body[update]));
-
-    updateTask.save();
+    const updateTask = await Task.findOne({
+      _id: req.params.id,
+      owner: req.user._id,
+    });
 
     if (!updateTask) {
       return res.status(404).json({
@@ -94,6 +91,10 @@ exports.updateTask = async (req, res) => {
         message: 'Task not found',
       });
     }
+
+    updates.forEach((update) => (updateTask[update] = req.body[update]));
+    updateTask.save();
+
     res.status(200).json({
       status: 'success',
       data: {
