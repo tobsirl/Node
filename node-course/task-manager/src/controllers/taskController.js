@@ -111,16 +111,14 @@ exports.updateTask = async (req, res) => {
 
 exports.deleteTask = async (req, res) => {
   try {
-    const deleteTask = await Task.findByIdAndDelete(req.params.id);
-    if (!deleteTask) {
-      return res.status(404).json({
-        status: 'failed',
-        message: 'Task not found',
-      });
-    }
-    res.status(200).json({
-      status: 'success',
+    const deleteTask = await Task.findOneAndDelete({
+      _id: req.params.id,
+      owner: req.user._id,
     });
+    if (!deleteTask) {
+      return res.status(404).send();
+    }
+    res.status(200).send(deleteTask);
   } catch (error) {
     res.status(500).json({
       status: 'failed',

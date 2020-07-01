@@ -20,6 +20,6 @@ router.get('/:id', auth, getTask);
 
 router.patch('/:id', auth, updateTask);
 
-router.delete('/:id', deleteTask);
+router.delete('/:id', auth, deleteTask);
 
 module.exports = router;
