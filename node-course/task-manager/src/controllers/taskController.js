@@ -23,10 +23,22 @@ exports.createTask = async (req, res) => {
   }
 };
 
+// Get /tasks?completed=false
 exports.getTasks = async (req, res) => {
+  const match = {};
+
+  if (req.query.completed) {
+    match.completed = req.query.completed === 'true';
+  }
+
   try {
     // const tasks = await Task.find({ owner: req.user._id });
-    await req.user.populate('tasks').execPopulate();
+    await req.user
+      .populate({
+        path: 'tasks',
+        match,
+      })
+      .execPopulate();
 
     res.status(200).json({
       status: 'success',
