@@ -24,6 +24,7 @@ exports.createTask = async (req, res) => {
 };
 
 // Get /tasks?completed=false
+// Get /tasks?limit=10&skip=0
 exports.getTasks = async (req, res) => {
   const match = {};
 
@@ -37,6 +38,10 @@ exports.getTasks = async (req, res) => {
       .populate({
         path: 'tasks',
         match,
+        options: {
+          limit: parseInt(req.query.limit),
+          skip: parseInt(req.query.skip),
+        },
       })
       .execPopulate();
 
