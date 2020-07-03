@@ -1,5 +1,9 @@
 // Models
 const User = require('../models/user');
+const multer = require('multer');
+const upload = multer({
+  dest: 'avatar',
+});
 
 exports.login = async (req, res) => {
   const { email, password } = req.body;
@@ -124,4 +128,8 @@ exports.deleteUser = async (req, res) => {
       status: 'failed',
     });
   }
+};
+
+exports.uploadAvatar = async (req, res) => {
+  res.send();
 };

@@ -1,5 +1,9 @@
 const express = require('express');
 const { auth } = require('../middleware/auth');
+const multer = require('multer');
+const upload = multer({
+  dest: 'avatars',
+});
 
 // Controllers
 const {
@@ -10,6 +14,7 @@ const {
   createUser,
   updateUser,
   deleteUser,
+  uploadAvatar,
 } = require('../controllers/userController');
 
 const router = express.Router();
@@ -28,5 +33,7 @@ router.post('/logoutall', auth, logoutAll);
 router.patch('/me', auth, updateUser);
 
 router.delete('/me', auth, deleteUser);
+
+router.post('/me/avatar', upload.single('avatar'), uploadAvatar);
 
 module.exports = router;
