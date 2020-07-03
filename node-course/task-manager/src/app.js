@@ -8,25 +8,14 @@ const app = express();
 
 app.use(express.json());
 
-// app.use((req, res, next) => {
-//   if (req.method === 'GET') {
-//     res.send('GET requests are disable');
-//   } else {
-//     next();
-//   }
-// });
+const multer = require('multer');
+const upload = multer({
+  dest: 'replays',
+});
 
-// app.use((req, res, next) => {
-//   const methods = ['GET', 'POST', 'PATCH', 'DELETE'];
-
-//   const isMatch = methods.every((method) => req.method === method);
-
-//   if (!isMatch) {
-//     res.status(503).send(`Server is under maintenace, please try again later`);
-//   } else {
-//     next();
-//   }
-// });
+app.post('/replay', upload.single('replay'), (req, res) => {
+  res.send();
+});
 
 // Routes
 app.use('/users/', userRouter);
