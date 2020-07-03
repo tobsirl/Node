@@ -11,6 +11,16 @@ app.use(express.json());
 const multer = require('multer');
 const upload = multer({
   dest: 'replays',
+  limits: {
+    fileSize: 1000000,
+  },
+  fileFilter(req, file, cb) {
+    if (!file.originalname.match(/\.(doc|docx)$/)) {
+      return cb(new Error(`Please upload a word document`));
+    }
+
+    cb(undefined, true);
+  },
 });
 
 app.post('/replay', upload.single('replay'), (req, res) => {

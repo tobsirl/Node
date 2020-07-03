@@ -3,6 +3,9 @@ const { auth } = require('../middleware/auth');
 const multer = require('multer');
 const upload = multer({
   dest: 'avatars',
+  limits: {
+    fileSize: 1000000,
+  },
 });
 
 // Controllers
