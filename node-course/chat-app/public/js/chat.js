@@ -5,6 +5,10 @@ socket.on('countUpdated', (count) => {
 });
 
 document.getElementById('increment').addEventListener('click', () => {
-  console.log(`Clicked`);
+  // console.log(`Clicked`);
   socket.emit('increment');
 });
+
+document.getElementById('toggleColor').addEventListener('click', () => {
+  socket.emit('toggleColor')
+})

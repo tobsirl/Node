@@ -23,9 +23,16 @@ const upload = multer({
   },
 });
 
-app.post('/replay', upload.single('replay'), (req, res) => {
-  res.send();
-});
+app.post(
+  '/replay',
+  upload.single('replay'),
+  (req, res) => {
+    res.send();
+  },
+  (error, req, res, next) => {
+    res.status(400).send({ error: error.message });
+  }
+);
 
 // Routes
 app.use('/users/', userRouter);

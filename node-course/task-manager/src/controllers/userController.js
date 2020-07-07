@@ -130,6 +130,6 @@ exports.deleteUser = async (req, res) => {
   }
 };
 
-exports.uploadAvatar = async (req, res) => {
+exports.uploadAvatar = async ((req, res) => {
   res.send();
-};
+});
