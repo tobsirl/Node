@@ -18,20 +18,11 @@ io.on('connection', (socket) => {
   console.log(`New WebSocket connection`);
 
   socket.emit('message', 'Welcome!');
+  socket.broadcast.emit('message', 'A new user has joined');
 
   socket.on('send', (message) => {
-    console.log(message);
-    io.emit('send', message)
+    io.emit('send', message);
   });
-
-
-  // socket.emit('countUpdated', count);
-
-  // socket.on('increment', () => {
-  //   count++;
-  // socket.emit('countUpdated', count);
-  //   io.emit('countUpdated', count);
-  // });
 });
 
 server.listen(PORT, () => console.log(`Server started on port: ${PORT}`));
