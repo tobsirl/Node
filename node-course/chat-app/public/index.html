@@ -1,16 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Chat App</title>
-  </head>
 
-  <body>
-    <h1>Chat App</h1>
-    <button id="increment">+1</button>
-    <button id="toggleColor">Toggle Color</button>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="/js/chat.js"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/css/styles.css">
+  <title>Chat App</title>
+</head>
+
+<body>
+  <!-- <h1>Chat App</h1>
+  <button id="increment">+1</button> -->
+
+  <div class="container">
+    <form class="form-section">
+      <label for="input">Please input your message</label>
+      <input type="text" id="input" placeholder="Enter your message">
+      <button class="btn">Send</button>
+    </form>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/chat.js"></script>
+</body>
+
 </html>

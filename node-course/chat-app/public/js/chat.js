@@ -4,6 +4,10 @@ socket.on('message', (message) => {
   console.log(message);
 });
 
+const form = document.querySelector('form');
+
+form.addEventListener('submit')
+
 // socket.on('countUpdated', (count) => {
 //   console.log(`The count has been updated!`, count);
 // });
