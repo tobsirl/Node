@@ -36,4 +36,9 @@ io.on('connection', (socket) => {
 
 server.listen(PORT, () => console.log(`Server started on port: ${PORT}`));
 ```
-
+### Socket.io on the client
+```js
+// Placed at the bottom of index.html
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/chat.js"></script>
+```
