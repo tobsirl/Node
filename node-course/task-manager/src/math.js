@@ -1,12 +1,12 @@
 const calculateTip = (total, tipPercent = 0.25) => total + total * tipPercent;
 
 const fahrenheitToCelsius = (temp) => {
-  return (temp - 32) / 1.8
-}
+  return (temp - 32) / 1.8;
+};
 
 const celsiusToFahrenheit = (temp) => {
-  return (temp * 1.8) + 32
-}
+  return temp * 1.8 + 32;
+};
 
 //
 // Goal: Test temperature conversion functions
@@ -16,4 +16,4 @@ const celsiusToFahrenheit = (temp) => {
 // 3. Create "Should convert 0 C to 32 F"
 // 4. Run the Jest to test your work!
 
-module.exports = { calculateTip };
+module.exports = { calculateTip, fahrenheitToCelsius, celsiusToFahrenheit };
