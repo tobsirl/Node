@@ -1,8 +1,9 @@
-test('should test a function', () => {
-  
-})
+const { calculateTip } = require('../src/math');
 
+test('should calculate the correct tip', () => {
+  expect(calculateTip(10, .3)).toEqual(13);
+});
 
-test('should fail', () => {
-  throw new Error('Failure')
-})
+test('should be a Number', () => {
+  expect(calculateTip);
+});
