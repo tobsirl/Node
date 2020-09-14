@@ -2,6 +2,7 @@ const {
   calculateTip,
   fahrenheitToCelsius,
   celsiusToFahrenheit,
+  app,
 } = require('../src/math');
 
 test('should calculate total with tip', () => {
@@ -18,4 +19,12 @@ test('Should convert 32 F to 0 C', () => {
 
 test('Should convert 0 C to 32 F', () => {
   expect(celsiusToFahrenheit(0)).toBe(32);
+});
+
+// Async test demo, pass a callback function
+test('Async test demo', (done) => {
+  setTimeout(() => {
+    expect(1).toBe(1);
+    done();
+  }, 2000);
 });
